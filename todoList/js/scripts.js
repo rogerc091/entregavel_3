@@ -1,6 +1,14 @@
 // Clase
-
+arrayTodos = [];
 class ToDo {
+  Texto
+  Prioridade
+  Feito = false;
+
+  constructor(texto,prioridade){
+    this.Texto = texto;
+    this.Prioridade = prioridade;
+  }
 
 }
 
@@ -9,30 +17,83 @@ class ToDo {
 
 //funções projeto
 
-function CriarToDo() {
+function CriarToDo(texto,prioridade,array) {
+  let novoTodo = new ToDo(texto,prioridade);
+  
+
+  if(array.some(x=>{x.Texto === texto})){
+    console.log("objeto ja existe.");
+  }else{
+    array.push(novoTodo);
+    console.log("deu certo, objeto criando e adicionado ao array.")
+    return novoTodo;
+  }
 
 }
 
-function AtualizarToDo() {
+function AtualizarToDo(textoAntigo,textoNovo,array) {
+  let verifica;
+  array.forEach(x=>{
+    if(x.Texto === textoAntigo){
+      x.Texto = textoNovo;
+      verifica = true;
+    }
+  })
+
+  return verifica
 
 }
 
-function ConcluirToDo() {
+function ConcluirToDo(array,texto) {
+  let verifica;
+  array.forEach(x=>{
+    if(x.Texto === texto){
+      if(x.Feito){
+        x.Feito = false;
+      }else{
+        x.Feito = true;
+      }
+      verifica = true;
+    }
+  })
+  return verifica
 
 }
 
-function ExcluirToDo() {
+function ExcluirToDo(array,texto) {
+  let verifica = false;
+  let index;
+  array.forEach(x=>{
+    if(x.Texto === texto){
+      index = array.indexOf(x);
+      verifica = true;
+    }
+  })
+  array.splice(index,1)
+  return verifica
 
 }
 
-function PesquisarToDo() {
+function PesquisarToDo(array,texto) {
+  let verifica = false;
+  for(let i =0; i< array.length;i++){
+    if(array[i].Texto === texto){
+      verifica = true;
+    }
+  }
  
 }
 
-function OrdenarCrescente() {
+function OrdenarCrescente(array) {
   
+  array.sort((a,b)=>a.Prioridade - b.Prioridade
+  )
+  return array
 }
-function OrdenarDecrescente() {
+
+function OrdenarDecrescente(array) {
+  array.sort((a,b)=> b.Prioridade - a.Prioridade)
+  return array
   
 }
 
